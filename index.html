@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<html lang="en">
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <title>Exam Simulation Timer</title>
@@ -36,6 +38,16 @@
             text-align: center;
         }
 
+        .leftCorner {
+            margin-bottom: 1px;
+            margin-left : 1px;
+            position: fixed;
+            bottom: 0;
+            color: white;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            text-align: left;
+        }
+
         h1 {
             font-size: 144px;
         }
@@ -64,15 +76,18 @@
     <p>Good luck! stay focused</p>
     <div class="playlists">
         <br>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1CEODgTmTwLyabvwd7HBty?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <iframe id="yoniMusic1" style="border-radius:12px" src="https://open.spotify.com/embed/album/1CEODgTmTwLyabvwd7HBty?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         <br>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5kReCe78iDCHD5bLFa1VyO?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <iframe id="yoniMusic2" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5kReCe78iDCHD5bLFa1VyO?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         <br>
-        <iframe allow="autoplay *; encrypted-media *; fullscreen *" frameborder="0" height="250" style="width:45%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/il/playlist/pl.u-r2yB1l4tPkzaNZB"></iframe>
+        <iframe id="sallyMusic1" allow="autoplay *; encrypted-media *; fullscreen *" frameborder="0" height="250" style="width:45%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/il/playlist/pl.u-r2yB1l4tPkzaNZB"></iframe>
     </div>
     <button id="stop" onclick="stopTimer()">Stop</button>
     <button id="play" onclick="playTimer()">Play</button>
     <button id="reset" onclick="resetTimer()">Reset</button>
+</div>
+<div class="leftCorner">
+    <button id="mode" onclick="switchMode()">Mode</button>
 </div>
 
 </body>
@@ -80,7 +95,7 @@
 <script>
     $( document ).ready(function() {
         console.log( "ready!" );
-
+        switchMode()
     });
 
     let countdown;
@@ -105,6 +120,19 @@
     function resetTimer() {
         clearInterval(countdown)
         startTimer()
+    }
+
+    function switchMode() {
+        if (document.getElementById("yoniMusic1").style.display === "none") {
+            document.getElementById("yoniMusic1").style.display = "initial";
+            document.getElementById("yoniMusic2").style.display = "initial"
+            document.getElementById("sallyMusic1").style.display = "none"
+        }
+        else {
+            document.getElementById("yoniMusic1").style.display = "none";
+            document.getElementById("yoniMusic2").style.display = "none"
+            document.getElementById("sallyMusic1").style.display = "initial"
+        }
     }
 
     function startTimer() {
