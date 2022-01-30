@@ -2,7 +2,7 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <title>My Website</title>
+    <title>Exam Simulation Timer</title>
     <style>
         *,
         html {
@@ -86,7 +86,10 @@
     let pause = false;
 
     function toggleFullScreen() {
-        document.documentElement.requestFullscreen();
+        try {
+            document.documentElement.requestFullscreen();
+        }
+        catch {}
     }
 
     function playTimer() {
