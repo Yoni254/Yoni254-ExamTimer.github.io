@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>My Website</title>
+    <style>
+        *,
+        html {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: rgb(52, 52, 52);
+        }
+
+        .center {
+            width: 100%;
+            height: 50%;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 144px;
+        }
+
+        p {
+            font-size: 64px;
+        }
+
+        button {
+            background-color: #555555; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="center">
+    <button id="start" onclick="startTimer()">Start</button>
+    <h1 id="timer"></h1>
+    <p>Good luck! stay focused</p>
+    <div class="playlists">
+        <br>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1CEODgTmTwLyabvwd7HBty?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <br>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5kReCe78iDCHD5bLFa1VyO?utm_source=generator" width="45%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+    <button id="stop" onclick="stopTimer()">Stop</button>
+    <button id="play" onclick="playTimer()">Play</button>
+    <button id="reset" onclick="resetTimer()">Reset</button>
+</div>
+
+</body>
+
+<script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+
+    });
+
+    let countdown;
+    let seconds;
+    let pause = false;
+
+    function toggleFullScreen() {
+        document.documentElement.requestFullscreen();
+    }
+
+    function playTimer() {
+        pause = false;
+    }
+
+    function stopTimer() {
+        pause = true;
+    }
+
+    function resetTimer() {
+        clearInterval(countdown)
+        startTimer()
+    }
+
+    function startTimer() {
+        toggleFullScreen()
+        // hide button
+        document.getElementById("start").style.display = "none"
+
+        seconds = 3 * 60 * 60
+        timer()
+        // Update the count down every 1 second
+        countdown = setInterval(function () {
+            if (!pause) {
+                timer()
+            }
+        }, 1000);
+    }
+
+    function timer() {
+        let hours = Math.floor(seconds / 3600);
+        let minutes = Math.floor(seconds / 60 % 60);
+        let calSeconds = Math.floor(seconds % 60)
+
+        // Display the result in the element with id="demo"
+        document.getElementById("timer").innerHTML = hours + "h "
+            + minutes + "m " + calSeconds + "s ";
+
+        seconds--;
+
+        // If the count down is finished, write some text
+        if (seconds < 0) {
+            document.getElementById("timer").innerHTML = "DONE! pens down ^_^"
+            clearInterval(countdown)
+        }
+    }
+
+
+</script>
+
+</html>
